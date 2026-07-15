@@ -106,10 +106,20 @@ const serviceHeroMobilePosition = page.service?.slug === "industrial-cybersecuri
         <div class="prose prose--large">
           {page.service.intro.map((paragraph) => <p>{paragraph}</p>)}
         </div>
-        <aside class="highlights" aria-label={locale === "de" ? "Leistungen" : "Services"}>
-          <p class="eyebrow">{locale === "de" ? "Leistungen" : "Capabilities"}</p>
-          <ul>{page.service.highlights.map((item) => <li>{item}</li>)}</ul>
-        </aside>
+        <div class="service-intro__aside">
+          <img
+            class="service-intro__image"
+            src={`${base}images/${page.service.introImage}`}
+            width="400"
+            height="267"
+            loading="eager"
+            alt={page.service.introImageAlt}
+          />
+          <aside class="highlights" aria-label={locale === "de" ? "Leistungen" : "Services"}>
+            <p class="eyebrow">{locale === "de" ? "Leistungen" : "Capabilities"}</p>
+            <ul>{page.service.highlights.map((item) => <li>{item}</li>)}</ul>
+          </aside>
+        </div>
       </div>
     </section>
     <section class="section section--soft service-sections">

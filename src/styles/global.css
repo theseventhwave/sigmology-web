@@ -187,6 +187,8 @@ address { font-style: normal; }
 .cta-band p:not(.eyebrow) { max-width: 720px; margin-bottom: 0; color: #423800; }
 
 .service-intro__grid { display: grid; grid-template-columns: 1fr 0.68fr; gap: 100px; align-items: start; }
+.service-intro__aside { display: grid; gap: 28px; }
+.service-intro__image { width: 100%; height: auto; box-shadow: var(--shadow); }
 .prose { max-width: 760px; }
 .prose h2 { margin: 0 0 24px; font-size: clamp(1.75rem, 3vw, 2.5rem); }
 .prose p { margin-bottom: 24px; color: var(--slate); }
@@ -205,7 +207,7 @@ address { font-style: normal; }
 .service-section__content h3 { margin-bottom: 24px; }
 .service-section__content p { color: var(--slate); }
 .service-section__content ul { columns: 2; column-gap: 32px; margin-top: 30px; padding-left: 19px; color: var(--slate); }
-.service-section img { align-self: center; width: 100%; box-shadow: var(--shadow); }
+.service-section img { align-self: center; width: 100%; height: auto; box-shadow: var(--shadow); }
 .more-services__header { max-width: 760px; margin-bottom: 42px; }
 .more-services__links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .more-services__links a { display: flex; min-height: 112px; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 34px; background: var(--white); font-size: 1.16rem; font-weight: 650; text-decoration: none; transition: background 160ms ease; }

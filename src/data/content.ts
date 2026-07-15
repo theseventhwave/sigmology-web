@@ -17,6 +17,8 @@ export type Service = {
   cardText: string;
   hero: string;
   cardImage: string;
+  introImage: string;
+  introImageAlt: string;
   intro: string[];
   highlights: string[];
   sections: ContentSection[];
@@ -105,6 +107,8 @@ export const services: Record<Locale, Service[]> = {
       cardText: "From hazard analysis and SIL assignment to verification and training.",
       hero: "functional-safety-hero.webp",
       cardImage: "functional-safety-card.webp",
+      introImage: "functional-safety-intro.webp",
+      introImageAlt: "Jet engine viewed from the front on an airport apron",
       intro: [
         "Functional safety prevents hazardous events by ensuring that a process reaches or maintains a safe state when normal control is no longer sufficient.",
         "We support organisations throughout the IEC 61511 safety lifecycle—from hazard analysis and SIL assignment to safety requirements, verification and training. Our work is designed to integrate with existing engineering processes and give teams clear, defensible results."
@@ -164,6 +168,8 @@ export const services: Record<Locale, Service[]> = {
       cardText: "Protecting industrial systems without losing sight of availability and safety.",
       hero: "cybersecurity-hero.webp",
       cardImage: "cybersecurity-card.webp",
+      introImage: "cybersecurity-intro.webp",
+      introImageAlt: "Digital padlock overlaid on electronic circuitry",
       intro: [
         "Industrial cybersecurity protects hardware, software, networks and data while respecting the availability, reliability and safety priorities of operational technology.",
         "As IT and OT converge, cyber incidents can create operational, financial, environmental and safety consequences. IEC 62443 provides a structured framework for understanding these risks and selecting proportionate controls."
@@ -208,6 +214,8 @@ export const services: Record<Locale, Service[]> = {
       cardText: "Connecting requirements, architecture, analysis and verification in one coherent model.",
       hero: "mbse-hero.webp",
       cardImage: "mbse-card.webp",
+      introImage: "mbse-intro.webp",
+      introImageAlt: "Engineer interacting with a digital systems interface",
       intro: [
         "Model-Based Systems Engineering applies modelling throughout the system lifecycle to support requirements, architecture, analysis, verification and validation.",
         "A well-designed model replaces disconnected documents with a coherent source of engineering knowledge. It makes relationships visible, improves traceability and enables analyses that would otherwise depend on repetitive manual work."
@@ -255,6 +263,7 @@ services.de = [
     eyebrow: "Menschen und Anlagen schützen",
     description: "Beratung, Analyse, Verifikation und Schulung entlang des gesamten Sicherheitslebenszyklus.",
     cardText: "Von der Gefährdungsanalyse und SIL-Einstufung bis zur Verifikation und Schulung.",
+    introImageAlt: "Frontansicht eines Strahltriebwerks auf dem Vorfeld",
     intro: [
       "Funktionale Sicherheit verhindert gefährliche Ereignisse, indem ein Prozess einen sicheren Zustand erreicht oder beibehält, wenn die normale Steuerung nicht mehr ausreicht.",
       "Wir begleiten Unternehmen entlang des Sicherheitslebenszyklus nach IEC 61511 – von der Gefährdungsanalyse und SIL-Einstufung über die Spezifikation der Sicherheitsanforderungen bis zur Verifikation und Schulung. Unsere Arbeit fügt sich in bestehende Engineering-Prozesse ein und liefert klare, belastbare Ergebnisse."
@@ -312,6 +321,7 @@ services.de = [
     eyebrow: "Vernetzte Anlagen sicher betreiben",
     description: "Risikobeurteilung, Security-Programme und sichere Produktentwicklung für industrielle Automatisierungs- und Leitsysteme.",
     cardText: "Industrielle Systeme schützen, ohne Verfügbarkeit und Safety aus dem Blick zu verlieren.",
+    introImageAlt: "Digitales Vorhängeschloss auf elektronischen Leiterbahnen",
     intro: [
       "Industrielle Cybersicherheit schützt Hardware, Software, Netzwerke und Daten und berücksichtigt dabei die besonderen Anforderungen der Betriebstechnik an Verfügbarkeit, Zuverlässigkeit und Safety.",
       "Mit der zunehmenden Verbindung von IT und OT können Cybervorfälle betriebliche, finanzielle, ökologische und sicherheitsrelevante Folgen haben. IEC 62443 bietet einen strukturierten Rahmen, um diese Risiken zu verstehen und angemessene Schutzmassnahmen festzulegen."
@@ -354,6 +364,7 @@ services.de = [
     eyebrow: "Komplexität verständlich machen",
     description: "Praktische MBSE- und SysML-Expertise für Architektur, Analyse, Verifikation und Engineering-Automatisierung.",
     cardText: "Anforderungen, Architektur, Analyse und Verifikation in einem konsistenten Modell verbinden.",
+    introImageAlt: "Ingenieurin oder Ingenieur an einer digitalen Systemschnittstelle",
     intro: [
       "Model-Based Systems Engineering nutzt Modelle über den gesamten Systemlebenszyklus hinweg und unterstützt Anforderungen, Architektur, Analyse, Verifikation und Validierung.",
       "Ein gut aufgebautes Modell ersetzt voneinander getrennte Dokumente durch eine konsistente Quelle für Engineering-Wissen. Es macht Zusammenhänge sichtbar, verbessert die Nachverfolgbarkeit und ermöglicht Analysen, die sonst wiederholte manuelle Arbeit erfordern würden."
