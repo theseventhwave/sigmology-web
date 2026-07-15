@@ -1,0 +1,19 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  image: string;
+  large?: boolean;
+}
+const { eyebrow, title, image, large = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class:list={["page-hero", large && "page-hero--large"]} style={`--hero-image: url('${base}images/${image}')`}>
+  <div class="page-hero__scrim"></div>
+  <div class="container page-hero__content">
+    {eyebrow && <p class="eyebrow eyebrow--light">{eyebrow}</p>}
+    <h1>{title}</h1>
+    <slot />
+  </div>
+</section>

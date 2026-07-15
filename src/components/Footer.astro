@@ -1,0 +1,47 @@
+---
+import { company, services, ui, type Locale } from "../data/content";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = ui[locale];
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const prefix = locale === "de" ? "/de" : "";
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section class="footer-intro" aria-labelledby="footer-brand">
+      <img src={`${base}images/logo.png`} width="196" height="60" alt="" />
+      <h2 id="footer-brand" class="sr-only">Sigmology</h2>
+      <p>{copy.footerText}</p>
+      <a class="text-link text-link--light" href={company.linkedin} target="_blank" rel="noreferrer">{copy.linkedin} <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <nav class="footer-section" aria-label={locale === "de" ? "Expertise" : "Expertise"}>
+      <h2>{copy.services}</h2>
+      <ul>
+        {services[locale].map((service) => (
+          <li><a href={withBase(`${prefix}/solutions/${service.slug}/`)}>{service.shortTitle}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <section class="footer-section">
+      <h2>{locale === "de" ? "Kontakt" : "Contact"}</h2>
+      <address>
+        {company.addressLine}<br />
+        {company.postalLine}<br />
+        {locale === "de" ? company.countryDe : company.country}
+      </address>
+      <p><a href={company.phoneHref}>{company.phoneDisplay}</a><br /><a href={company.emailHref}>{company.email}</a></p>
+    </section>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {new Date().getFullYear()} {company.name}. {copy.rights}</p>
+    <nav aria-label={locale === "de" ? "Rechtliches" : "Legal"}>
+      <a href={withBase(`${prefix}/legal-notice/`)}>{copy.legal}</a>
+      <a href={withBase(`${prefix}/privacy-policy/`)}>{copy.privacy}</a>
+    </nav>
+  </div>
+</footer>

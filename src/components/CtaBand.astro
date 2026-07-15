@@ -1,0 +1,14 @@
+---
+import { ui, type Locale } from "../data/content";
+interface Props { locale: Locale; title: string; text: string }
+const { locale, title, text } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const path = locale === "de" ? "/de/contact/" : "/contact/";
+---
+
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><p class="eyebrow">{locale === "de" ? "Kontakt" : "Contact"}</p><h2>{title}</h2><p>{text}</p></div>
+    <a class="button button--dark" href={`${base}${path.replace(/^\//, "")}`}>{ui[locale].contact}</a>
+  </div>
+</section>

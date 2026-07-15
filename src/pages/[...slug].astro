@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageRenderer from "../components/PageRenderer.astro";
+import { pages, type PageData } from "../data/content";
+
+export function getStaticPaths() {
+  return pages.filter((page) => page.path !== "/").map((page) => ({
+    params: { slug: page.path.slice(1, -1) },
+    props: { page }
+  }));
+}
+
+interface Props { page: PageData }
+const { page } = Astro.props;
+---
+<BaseLayout page={page}><PageRenderer page={page} /></BaseLayout>

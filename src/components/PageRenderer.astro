@@ -1,0 +1,208 @@
+---
+import {
+  aboutCopy,
+  company,
+  contactCopy,
+  homeCopy,
+  legalCopy,
+  privacyCopy,
+  services,
+  ui,
+  type PageData
+} from "../data/content";
+import CtaBand from "./CtaBand.astro";
+import PageHero from "./PageHero.astro";
+import ServiceCards from "./ServiceCards.astro";
+import Team from "./Team.astro";
+
+interface Props { page: PageData }
+const { page } = Astro.props;
+const locale = page.locale;
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const prefix = locale === "de" ? "/de" : "";
+const home = homeCopy[locale];
+const about = aboutCopy[locale];
+const contact = contactCopy[locale];
+const legal = legalCopy[locale];
+const privacy = privacyCopy[locale];
+---
+
+{page.kind === "home" && (
+  <>
+    <PageHero eyebrow={home.eyebrow} title={home.title} image="home-hero.webp" large>
+      <p class="hero-lead">{home.lead}</p>
+      <div class="button-row">
+        <a class="button" href={withBase(`${prefix}/solutions/`)}>{home.primaryCta}</a>
+        <a class="button button--ghost" href={withBase(`${prefix}/contact/`)}>{home.secondaryCta}</a>
+      </div>
+    </PageHero>
+
+    <section class="section section--intro">
+      <div class="container intro-grid">
+        <p class="section-index" aria-hidden="true">01</p>
+        <div><p class="eyebrow">{ui[locale].services}</p><h2>{home.introTitle}</h2></div>
+        <p class="large-copy">{home.intro}</p>
+      </div>
+      <div class="container"><ServiceCards locale={locale} /></div>
+    </section>
+
+    <section class="section section--dark">
+      <div class="container capabilities-grid">
+        <div><p class="eyebrow eyebrow--yellow">{locale === "de" ? "Leistungsspektrum" : "Capabilities"}</p><h2>{home.capabilitiesTitle}</h2></div>
+        <ul class="capability-list">
+          {home.capabilities.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container values-grid">
+        {home.values.map((value, index) => (
+          <article class="value-card"><span aria-hidden="true">0{index + 1}</span><h2>{value.title}</h2><p>{value.text}</p></article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container split-heading">
+        <div><p class="eyebrow">{locale === "de" ? "Gründerteam" : "Team"}</p><h2>{home.teamTitle}</h2></div>
+        <p class="large-copy">{home.teamText}</p>
+      </div>
+      <div class="container"><Team locale={locale} compact /></div>
+    </section>
+
+    <CtaBand locale={locale} title={home.ctaTitle} text={home.ctaText} />
+  </>
+)}
+
+{page.kind === "solutions" && (
+  <>
+    <PageHero
+      eyebrow={locale === "de" ? "Drei Disziplinen. Eine Systemsicht." : "Three disciplines. One system view."}
+      title={locale === "de" ? "Expertise für komplexe industrielle Systeme" : "Expertise for complex industrial systems"}
+      image="solutions-hero.webp"
+    />
+    <section class="section">
+      <div class="container split-heading split-heading--bordered">
+        <div><p class="eyebrow">{ui[locale].services}</p><h2>{locale === "de" ? "Risiken verstehen. Systeme verlässlich gestalten." : "Understand risk. Engineer dependable systems."}</h2></div>
+        <p class="large-copy">{locale === "de"
+          ? "Wir verbinden fundierte Fachkenntnis mit einem integrierten Blick auf Systemarchitektur, Safety und Cybersecurity. Wählen Sie einen Bereich, um unser Leistungsspektrum kennenzulernen."
+          : "We combine deep specialist knowledge with an integrated view of system architecture, safety and cybersecurity. Choose an area to explore how we can support your work."}</p>
+      </div>
+      <div class="container"><ServiceCards locale={locale} /></div>
+    </section>
+    <CtaBand locale={locale} title={home.ctaTitle} text={home.ctaText} />
+  </>
+)}
+
+{page.kind === "service" && page.service && (
+  <>
+    <PageHero eyebrow={page.service.eyebrow} title={page.service.title} image={page.service.hero} />
+    <section class="section service-intro">
+      <div class="container service-intro__grid">
+        <div class="prose prose--large">
+          {page.service.intro.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <aside class="highlights" aria-label={locale === "de" ? "Leistungen" : "Services"}>
+          <p class="eyebrow">{locale === "de" ? "Leistungen" : "Capabilities"}</p>
+          <ul>{page.service.highlights.map((item) => <li>{item}</li>)}</ul>
+        </aside>
+      </div>
+    </section>
+    <section class="section section--soft service-sections">
+      <div class="container service-sections__header">
+        <p class="eyebrow">{locale === "de" ? "Im Detail" : "In detail"}</p>
+        <h2>{locale === "de" ? "Vom Rahmenwerk zur belastbaren Entscheidung" : "From framework to defensible decision"}</h2>
+      </div>
+      <div class="container service-section-list">
+        {page.service.sections.map((section, index) => (
+          <article class:list={["service-section", section.image && "service-section--with-image"]}>
+            <p class="service-section__number" aria-hidden="true">0{index + 1}</p>
+            <div class="service-section__content">
+              <h3>{section.title}</h3>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+            </div>
+            {section.image && <img src={`${base}images/${section.image}`} width="1024" height="481" loading="lazy" alt={section.imageAlt ?? ""} />}
+          </article>
+        ))}
+      </div>
+    </section>
+    <section class="section more-services">
+      <div class="container more-services__header"><p class="eyebrow">{locale === "de" ? "Weitere Expertise" : "Related expertise"}</p><h2>{locale === "de" ? "Das System als Ganzes betrachten" : "See the system as a whole"}</h2></div>
+      <div class="container more-services__links">
+        {services[locale].filter((item) => item.slug !== page.service?.slug).map((item) => (
+          <a href={withBase(`${prefix}/solutions/${item.slug}/`)}><span>{item.shortTitle}</span><span aria-hidden="true">↗</span></a>
+        ))}
+      </div>
+    </section>
+    <CtaBand locale={locale} title={home.ctaTitle} text={home.ctaText} />
+  </>
+)}
+
+{page.kind === "about" && (
+  <>
+    <PageHero eyebrow={about.eyebrow} title={about.title} image="about-hero.webp" />
+    <section class="section">
+      <div class="container about-story">
+        <div class="about-story__copy"><p class="eyebrow">{locale === "de" ? "Unsere Idee" : "Our idea"}</p><h2>{about.heading}</h2>{about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+        <div class="about-story__images">
+          <img src={`${base}images/about-idea.webp`} width="650" height="450" alt="" />
+          <div><img src={`${base}images/about-workshop.webp`} width="650" height="450" loading="lazy" alt="" /><img src={`${base}images/about-team.webp`} width="650" height="450" loading="lazy" alt="" /></div>
+        </div>
+      </div>
+    </section>
+    <section class="section section--dark">
+      <div class="container"><p class="eyebrow eyebrow--yellow">{about.principlesTitle}</p><div class="values-grid values-grid--dark">{about.principles.map((item, index) => <article class="value-card"><span aria-hidden="true">0{index + 1}</span><h2>{item.title}</h2><p>{item.text}</p></article>)}</div></div>
+    </section>
+    <section class="section section--soft">
+      <div class="container section-heading"><p class="eyebrow">{locale === "de" ? "Menschen" : "People"}</p><h2>{about.teamTitle}</h2></div>
+      <div class="container"><Team locale={locale} /></div>
+    </section>
+    <CtaBand locale={locale} title={home.ctaTitle} text={home.ctaText} />
+  </>
+)}
+
+{page.kind === "contact" && (
+  <>
+    <PageHero eyebrow={contact.eyebrow} title={contact.title} image="contact-hero.webp" />
+    <section class="section contact-page">
+      <div class="container contact-page__intro"><h2>{contact.heading}</h2><p class="large-copy">{contact.intro}</p></div>
+      <div class="container contact-cards">
+        <article class="contact-card"><p class="eyebrow">{contact.emailLabel}</p><a href={company.emailHref}>{company.email}</a><p>{locale === "de" ? "Für Projektanfragen und fachliche Fragen" : "For project enquiries and technical questions"}</p></article>
+        <article class="contact-card"><p class="eyebrow">{contact.phoneLabel}</p><a href={company.phoneHref}>{company.phoneDisplay}</a><p>{contact.availability}</p></article>
+        <article class="contact-card"><p class="eyebrow">{contact.addressLabel}</p><address>{company.addressLine}<br />{company.postalLine}<br />{locale === "de" ? company.countryDe : company.country}</address></article>
+      </div>
+      <div class="container linkedin-panel"><div><p class="eyebrow">LinkedIn</p><h2>{contact.linkedinText}</h2></div><a class="button button--dark" href={company.linkedin} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </>
+)}
+
+{page.kind === "legal" && (
+  <>
+    <PageHero title={legal.title} image="contact-hero.webp" />
+    <section class="section legal-page">
+      <div class="container legal-grid">
+        <aside><p class="eyebrow">{legal.companyDetails}</p><address><strong>{company.name}</strong><br />{company.addressLine}<br />{company.postalLine}<br />{locale === "de" ? company.countryDe : company.country}</address><p><a href={company.emailHref}>{company.email}</a><br /><a href={company.phoneHref}>{company.phoneDisplay}</a></p><dl><dt>{legal.register}</dt><dd>{company.registerNumber}</dd><dt>{legal.registerOffice}</dt><dd>{locale === "de" ? "Zürich" : "Zurich"}</dd><dt>{legal.vat}</dt><dd>{company.vatNumber}</dd></dl></aside>
+        <div class="prose"><section><h2>{legal.disclaimerTitle}</h2><p>{legal.disclaimer}</p></section><section><h2>{legal.linksTitle}</h2><p>{legal.links}</p></section><section><h2>{legal.copyrightTitle}</h2><p>{legal.copyright}</p></section></div>
+      </div>
+    </section>
+  </>
+)}
+
+{page.kind === "privacy" && (
+  <>
+    <PageHero title={privacy.title} image="contact-hero.webp" />
+    <section class="section legal-page">
+      <div class="container privacy-grid">
+        <aside><p class="eyebrow">{locale === "de" ? "Kurzfassung" : "At a glance"}</p><p>{locale === "de" ? "Keine Analyse. Keine Werbetracker. Keine Formulare. Keine eingebetteten Medien." : "No analytics. No advertising trackers. No forms. No embedded media."}</p><p><a class="text-link" href={company.emailHref}>{company.email} <span aria-hidden="true">→</span></a></p></aside>
+        <div class="prose prose--policy"><p class="large-copy">{privacy.intro}</p>{privacy.sections.map((section) => <section><h2>{section.title}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}{(section.title === "Website hosting" || section.title === "Hosting der Website") && <p><a class="text-link" href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noreferrer">{locale === "de" ? "Datenschutzerklärung von GitHub" : "GitHub Privacy Statement"} <span aria-hidden="true">↗</span></a></p>}</section>)}</div>
+      </div>
+    </section>
+  </>
+)}
+
+{page.kind === "not-found" && (
+  <section class="not-found"><div class="container"><p class="eyebrow">404</p><h1>{locale === "de" ? "Diese Seite gibt es nicht." : "This page does not exist."}</h1><p>{locale === "de" ? "Die gesuchte Adresse wurde möglicherweise geändert oder entfernt." : "The address may have changed or the page may have been removed."}</p><a class="button" href={withBase(locale === "de" ? "/de/" : "/")}>{locale === "de" ? "Zur Startseite" : "Return home"}</a></div></section>
+)}

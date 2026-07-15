@@ -1,0 +1,19 @@
+---
+import { aboutCopy, type Locale } from "../data/content";
+
+interface Props { locale: Locale; compact?: boolean }
+const { locale, compact = false } = Astro.props;
+const copy = aboutCopy[locale];
+const base = import.meta.env.BASE_URL;
+---
+
+<div class:list={["team-grid", compact && "team-grid--compact"]}>
+  <article class="person-card">
+    <img src={`${base}images/nadja-brush.webp`} width="260" height="260" loading="lazy" alt="Nadja Brush" />
+    <div><p class="person-card__role">{copy.nadjaRole}</p><h3>Nadja Brush</h3><p>{locale === "de" ? "Mitgründerin" : "Co-founder"}</p></div>
+  </article>
+  <article class="person-card">
+    <img src={`${base}images/john-brush.webp`} width="260" height="260" loading="lazy" alt="John Brush" />
+    <div><p class="person-card__role">{copy.johnRole}</p><h3>John Brush</h3><p>{locale === "de" ? "Mitgründer" : "Co-founder"}</p></div>
+  </article>
+</div>

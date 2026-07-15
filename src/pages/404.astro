@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageRenderer from "../components/PageRenderer.astro";
+import type { PageData } from "../data/content";
+
+const page: PageData = {
+  kind: "not-found",
+  locale: "en",
+  path: "/404/",
+  alternatePath: "/de/",
+  title: "Page not found",
+  description: "The requested page could not be found."
+};
+---
+<BaseLayout page={page} noindex><PageRenderer page={page} /></BaseLayout>

@@ -1,0 +1,88 @@
+---
+import { company, ui, type Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+  path: string;
+  alternatePath: string;
+}
+
+const { locale, path, alternatePath } = Astro.props;
+const copy = ui[locale];
+const base = import.meta.env.BASE_URL;
+const withBase = (target: string) => `${base}${target.replace(/^\//, "")}`;
+const isActive = (target: string) => {
+  if (target === "/" || target === "/de/") return path === target;
+  if (target.includes("solutions")) return path.includes("/solutions/");
+  return path === target;
+};
+---
+
+<header class="site-header">
+  <div class="contact-strip">
+    <div class="container contact-strip__inner">
+      <div class="contact-strip__details">
+        <span>{company.addressLine}, {company.postalLine}</span>
+        <a href={company.phoneHref}>{company.phoneDisplay}</a>
+      </div>
+      <div class="contact-strip__links">
+        <a href={company.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="language-link" href={withBase(alternatePath)} lang={locale === "en" ? "de-CH" : "en"}>
+          {copy.otherLanguage}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container masthead">
+    <a class="brand" href={withBase(locale === "en" ? "/" : "/de/")} aria-label="Sigmology home">
+      <img src={`${base}images/logo.png`} width="196" height="60" alt="Sigmology" />
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-open-label={copy.menu} data-close-label={copy.close}>
+      <span class="menu-toggle__label">{copy.menu}</span>
+      <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav id="site-nav" class="main-nav" aria-label={locale === "de" ? "Hauptnavigation" : "Main navigation"}>
+      <ul>
+        {copy.nav.map((item) => (
+          <li><a href={withBase(item.path)} aria-current={isActive(item.path) ? "page" : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="button button--small" href={withBase(locale === "en" ? "/contact/" : "/de/contact/")}>{copy.contact}</a>
+      <a class="mobile-language" href={withBase(alternatePath)} lang={locale === "en" ? "de-CH" : "en"}>{copy.otherLanguage}</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const navigation = document.querySelector<HTMLElement>("#site-nav");
+  const toggleLabel = toggle?.querySelector<HTMLElement>(".menu-toggle__label");
+
+  const closeMenu = () => {
+    toggle?.setAttribute("aria-expanded", "false");
+    if (toggle && toggleLabel) {
+      toggleLabel.textContent = toggle.dataset.openLabel ?? "Menu";
+      toggle.setAttribute("aria-label", toggle.dataset.openLabel ?? "Menu");
+    }
+    navigation?.classList.remove("is-open");
+    document.body.classList.remove("menu-open");
+  };
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    if (toggleLabel) {
+      const nextLabel = open ? toggle.dataset.openLabel : toggle.dataset.closeLabel;
+      toggleLabel.textContent = nextLabel ?? "Menu";
+      toggle.setAttribute("aria-label", nextLabel ?? "Menu");
+    }
+    navigation?.classList.toggle("is-open", !open);
+    document.body.classList.toggle("menu-open", !open);
+  });
+
+  navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
+</script>
