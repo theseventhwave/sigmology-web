@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/roboto-latin-variable.woff2") format("woff2-variations");
+}
+
 :root {
   --yellow: #f5c400;
   --yellow-bright: #ffd000;
@@ -19,7 +27,7 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--white);
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Roboto", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
