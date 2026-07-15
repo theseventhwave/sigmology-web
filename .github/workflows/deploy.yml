@@ -18,8 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: https://theseventhwave.github.io
-      BASE_PATH: /sigmology-web
+      SITE_URL: https://sigmology.ch
+      BASE_PATH: /
       ASTRO_TELEMETRY_DISABLED: true
     steps:
       - name: Check out repository
