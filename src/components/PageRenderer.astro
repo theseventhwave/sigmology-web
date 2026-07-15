@@ -26,11 +26,12 @@ const about = aboutCopy[locale];
 const contact = contactCopy[locale];
 const legal = legalCopy[locale];
 const privacy = privacyCopy[locale];
+const serviceHeroMobilePosition = page.service?.slug === "industrial-cybersecurity" ? "32% center" : "center";
 ---
 
 {page.kind === "home" && (
   <>
-    <PageHero eyebrow={home.eyebrow} title={home.title} image="home-hero.webp" large>
+    <PageHero eyebrow={home.eyebrow} title={home.title} image="home-hero.webp" position="68% center" mobilePosition="75% center" large>
       <p class="hero-lead">{home.lead}</p>
       <div class="button-row">
         <a class="button" href={withBase(`${prefix}/solutions/`)}>{home.primaryCta}</a>
@@ -82,6 +83,7 @@ const privacy = privacyCopy[locale];
       eyebrow={locale === "de" ? "Drei Disziplinen. Eine Systemsicht." : "Three disciplines. One system view."}
       title={locale === "de" ? "Expertise für komplexe industrielle Systeme" : "Expertise for complex industrial systems"}
       image="solutions-hero.webp"
+      mobilePosition="50% center"
     />
     <section class="section">
       <div class="container split-heading split-heading--bordered">
@@ -98,7 +100,7 @@ const privacy = privacyCopy[locale];
 
 {page.kind === "service" && page.service && (
   <>
-    <PageHero eyebrow={page.service.eyebrow} title={page.service.title} image={page.service.hero} />
+    <PageHero eyebrow={page.service.eyebrow} title={page.service.title} image={page.service.hero} mobilePosition={serviceHeroMobilePosition} />
     <section class="section service-intro">
       <div class="container service-intro__grid">
         <div class="prose prose--large">
@@ -143,7 +145,7 @@ const privacy = privacyCopy[locale];
 
 {page.kind === "about" && (
   <>
-    <PageHero eyebrow={about.eyebrow} title={about.title} image="about-hero.webp" />
+    <PageHero eyebrow={about.eyebrow} title={about.title} image="about-hero.webp" mobilePosition="55% center" />
     <section class="section">
       <div class="container about-story">
         <div class="about-story__copy"><p class="eyebrow">{locale === "de" ? "Unsere Idee" : "Our idea"}</p><h2>{about.heading}</h2>{about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
@@ -166,7 +168,7 @@ const privacy = privacyCopy[locale];
 
 {page.kind === "contact" && (
   <>
-    <PageHero eyebrow={contact.eyebrow} title={contact.title} image="contact-hero.webp" />
+    <PageHero eyebrow={contact.eyebrow} title={contact.title} image="contact-hero.webp" mobilePosition="76% center" />
     <section class="section contact-page">
       <div class="container contact-page__intro"><h2>{contact.heading}</h2><p class="large-copy">{contact.intro}</p></div>
       <div class="container contact-cards">
@@ -181,7 +183,7 @@ const privacy = privacyCopy[locale];
 
 {page.kind === "legal" && (
   <>
-    <PageHero title={legal.title} image="contact-hero.webp" />
+    <PageHero title={legal.title} image="contact-hero.webp" mobilePosition="76% center" />
     <section class="section legal-page">
       <div class="container legal-grid">
         <aside><p class="eyebrow">{legal.companyDetails}</p><address><strong>{company.name}</strong><br />{company.addressLine}<br />{company.postalLine}<br />{locale === "de" ? company.countryDe : company.country}</address><p><a href={company.emailHref}>{company.email}</a><br /><a href={company.phoneHref}>{company.phoneDisplay}</a></p><dl><dt>{legal.register}</dt><dd>{company.registerNumber}</dd><dt>{legal.registerOffice}</dt><dd>{locale === "de" ? "Zürich" : "Zurich"}</dd><dt>{legal.vat}</dt><dd>{company.vatNumber}</dd></dl></aside>
@@ -193,7 +195,7 @@ const privacy = privacyCopy[locale];
 
 {page.kind === "privacy" && (
   <>
-    <PageHero title={privacy.title} image="contact-hero.webp" />
+    <PageHero title={privacy.title} image="contact-hero.webp" mobilePosition="76% center" />
     <section class="section legal-page">
       <div class="container privacy-grid">
         <aside><p class="eyebrow">{locale === "de" ? "Kurzfassung" : "At a glance"}</p><p>{locale === "de" ? "Keine Analyse. Keine Werbetracker. Keine Formulare. Keine eingebetteten Medien." : "No analytics. No advertising trackers. No forms. No embedded media."}</p><p><a class="text-link" href={company.emailHref}>{company.email} <span aria-hidden="true">→</span></a></p></aside>

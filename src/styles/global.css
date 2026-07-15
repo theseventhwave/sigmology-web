@@ -119,16 +119,17 @@ address { font-style: normal; }
   position: relative;
   isolation: isolate;
   display: grid;
-  min-height: clamp(360px, 48vw, 540px);
+  min-height: clamp(380px, 42vw, 480px);
   align-items: end;
   overflow: hidden;
   background-image: var(--hero-image);
-  background-position: center;
+  background-position: var(--hero-position, center);
   background-size: cover;
 }
-.page-hero--large { min-height: clamp(560px, 69vw, 760px); background-position: center 42%; }
+.page-hero--large { min-height: clamp(580px, 56vw, 650px); }
 .page-hero__scrim { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(15, 17, 20, 0.88) 0%, rgba(15, 17, 20, 0.67) 48%, rgba(15, 17, 20, 0.16) 100%); }
-.page-hero__content { padding-block: clamp(74px, 10vw, 120px); }
+.page-hero__content { padding-block: clamp(64px, 7vw, 92px); }
+.page-hero--large .page-hero__content { padding-block: clamp(68px, 7vw, 84px); }
 .page-hero h1 { max-width: 900px; margin-bottom: 0; color: var(--white); font-size: clamp(3rem, 6.5vw, 5.65rem); }
 .page-hero--large h1 { max-width: 920px; font-size: clamp(3.45rem, 7vw, 6.7rem); }
 .hero-lead { max-width: 760px; margin-top: 30px; color: rgba(255, 255, 255, 0.88); font-size: clamp(1.13rem, 2vw, 1.44rem); line-height: 1.6; }
@@ -315,9 +316,11 @@ address { font-style: normal; }
   .masthead { min-height: 72px; }
   .brand img { width: 145px; }
   .main-nav { inset: 114px 0 0; padding-inline: 24px; }
-  .page-hero, .page-hero--large { min-height: 510px; background-position: center; }
+  .page-hero { min-height: 440px; background-position: var(--hero-position-mobile, var(--hero-position, center)); }
+  .page-hero--large { min-height: 620px; background-position: var(--hero-position-mobile, var(--hero-position, center)); }
   .page-hero__scrim { background: linear-gradient(180deg, rgba(15, 17, 20, 0.4) 0%, rgba(15, 17, 20, 0.88) 100%); }
-  .page-hero__content { padding-block: 70px; }
+  .page-hero__content { padding-block: 58px; }
+  .page-hero--large .page-hero__content { padding-block: 64px; }
   .page-hero h1, .page-hero--large h1 { font-size: clamp(2.7rem, 13vw, 4.35rem); }
   .hero-lead { font-size: 1.06rem; }
   .button-row { align-items: stretch; flex-direction: column; }
